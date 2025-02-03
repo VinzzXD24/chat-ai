@@ -96,16 +96,19 @@
       white-space: pre-wrap;
     }
 
-    .message.user {
-      background: var(--input-bg);
-      align-self: flex-end;
-      text-align: right;
-    }
-
     .message.ai {
       background: var(--secondary);
       align-self: flex-start;
       text-align: left;
+    }
+
+    .message.user {
+      background: var(--input-bg);
+      align-self: flex-end;
+      text-align: right;
+      margin-left: auto;
+      /* Membuat sudut bubble user sedikit berbeda untuk tampilan lebih rapi */
+      border-top-right-radius: 0;
     }
 
     .chat-input {

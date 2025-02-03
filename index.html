@@ -92,6 +92,8 @@
       border-radius: 8px;
       max-width: 80%;
       box-shadow: 0 2px 8px var(--shadow);
+      word-wrap: break-word;
+      white-space: pre-wrap;
     }
 
     .message.user {
@@ -155,6 +157,7 @@
     const sendBtn = document.getElementById("sendBtn");
     const newChatBtn = document.getElementById("newChat");
 
+    // Fungsi untuk memuat chat dari local storage
     function loadChat() {
       const chatData = localStorage.getItem("chatHistory");
       if (chatData) {
@@ -162,10 +165,12 @@
       }
     }
 
+    // Fungsi untuk menyimpan chat ke local storage
     function saveChat() {
       localStorage.setItem("chatHistory", chatMessages.innerHTML);
     }
 
+    // Fungsi untuk menambahkan pesan ke chat
     function appendMessage(sender, text) {
       const messageDiv = document.createElement("div");
       messageDiv.classList.add("message", sender);
@@ -175,15 +180,16 @@
       saveChat();
     }
 
+    // Event untuk mengirim pesan
     sendBtn.addEventListener("click", () => {
       const message = userInput.value.trim();
       if (!message) return;
-
       appendMessage("user", message);
       userInput.value = "";
       fetchAIResponse(message);
     });
 
+    // Kirim pesan dengan Enter (tanpa shift)
     userInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
@@ -191,6 +197,7 @@
       }
     });
 
+    // Fungsi untuk memanggil API dan mengambil respons AI
     async function fetchAIResponse(message) {
       try {
         const response = await fetch(`https://restapi.apibotwa.biz.id/api/gptlogic?message=${encodeURIComponent(message)}&prompt=Perkenalan Nama Gua Netcyzen AI Yang Gaul 😎`);
@@ -205,11 +212,13 @@
       }
     }
 
+    // Event untuk tombol New Chat
     newChatBtn.addEventListener("click", () => {
       chatMessages.innerHTML = "";
       localStorage.removeItem("chatHistory");
     });
 
+    // Memuat chat dari local storage saat halaman dimuat
     loadChat();
   </script>
 
